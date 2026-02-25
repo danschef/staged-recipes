@@ -15,8 +15,8 @@ requirements:
     - qgis>=3.42.2
     - astropy
     - catboost
-    - enpt>=1.0.3
-    - enpt_enmapboxapp>=0.7.6
+    - enpt>=1.2.1
+    - enpt_enmapboxapp>=1.0.2
     - enfrosp_enmapboxapp
     - h5py
     - lightgbm
