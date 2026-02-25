@@ -15,8 +15,6 @@ requirements:
     - qgis>=3.42.2
     - astropy
     - catboost
-    - cdsapi
-    # - cython
     - docutils
     - enpt>=1.0.3
     - enpt_enmapboxapp>=0.7.6
@@ -32,8 +30,6 @@ requirements:
     - numba>=0.56.4
     - opencv
     - pandas=2.2.3
-    - pygrib
-    - pyhdf
     - pyopengl
     # - pytest
     # - pytest-cov
@@ -44,7 +40,6 @@ requirements:
     - sympy
     - tensorboard
     - torchvision
-    - xarray
     - xgboost
 
 test:
