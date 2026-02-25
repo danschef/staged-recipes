@@ -12,7 +12,6 @@ build:
 requirements:
   run:
     - python>=3.10
-    - qgis>=3.42.2
     - astropy
     - catboost
     - enpt>=1.2.1
@@ -28,6 +27,7 @@ requirements:
     - pandas=2.2.3
     - pyopengl
     - pytorch
+    - qgis>=3.42.2
     - scikit-learn>=1
     - segmentation-models-pytorch
     - sympy
