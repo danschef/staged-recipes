@@ -1,5 +1,6 @@
-{% set name = "enmapbox-deps" %}
+{% set name = "enmapbox" %}
 {% set version = "0.1.0" %}
+{% set qgis_ltr_version = "3.40" %}  # adjust to current LTR
 
 package:
   name: {{ name }}
@@ -9,48 +10,100 @@ build:
   number: 0
   noarch: generic
 
-requirements:
-  run:
-    - python>=3.10
-    - astropy
-    - catboost
-    - enpt>=1.2.1
-    - enpt_enmapboxapp>=1.0.2
-    - enfrosp_enmapboxapp
-    - h5py
-    - lightgbm
-    - lightning
-    - matplotlib
-    - netcdf4
-    - numba>=0.56.4
-    - opencv
-    - pandas
-    - pyopengl
-    - pytorch
-    - qgis>=3.42.2
-    - scikit-learn
-    - segmentation-models-pytorch
-    - sympy
-    - tensorboard
-    - torchvision
-    - xgboost
+outputs:
+  # -------------------
+  # Lite / core version
+  # -------------------
+  - name: enmapbox-lite
+    noarch: generic
+    requirements:
+      run:
+        - python >=3.10
+        - qgis >={{ qgis_ltr_version }}
+        - colorama
+        - gdal
+        - matplotlib
+        - numpy
+        - scikit-learn
+    test:
+      imports:
+        - qgis
+        - osgeo.gdal
 
-test:
-  commands:
-    # QGIS Python must start
-    - |
-      export QT_QPA_PLATFORM=offscreen
-      python -c "from qgis.core import QgsApplication; \
-                 app = QgsApplication([], False); \
-                 app.initQgis(); \
-                 print('QGIS OK'); \
-                 app.exitQgis()"
+  # ------------
+  # Full version
+  # ------------
+  - name: enmapbox-full
+    noarch: generic
+    requirements:
+      run:
+        - enmapbox-lite
 
-  imports:
-    - qgis
-    - osgeo.gdal
-    - enpt
-    - numba
+        - astropy
+        - catboost
+        - enfrosp_enmapboxapp
+        - enpt >=1.2.1
+        - enpt_enmapboxapp >=1.0.2
+        - h5py
+        - lightgbm
+        - lightning
+        - netcdf4
+        - numba >=0.56.4
+        - opencv
+        - pandas
+        - pyopengl
+        - pytorch
+        - segmentation-models-pytorch
+        - sympy
+        - tensorboard
+        - torchvision
+        - xgboost
+
+    test:
+      commands:
+        # QGIS Python must start
+        - |
+          export QT_QPA_PLATFORM=offscreen
+          python -c "from qgis.core import QgsApplication; \
+                     app = QgsApplication([], False); \
+                     app.initQgis(); \
+                     print('QGIS OK'); \
+                     app.exitQgis()"
+      imports:
+        - qgis
+        - osgeo.gdal
+        - enpt
+        - numba
+
+  # ---------------
+  # Alias (default)
+  # ---------------
+  - name: enmapbox
+    noarch: generic
+    requirements:
+      run:
+        - enmapbox-full
+
+  # --------------------------
+  # Lite version with QGIS LTR
+  # --------------------------
+  - name: enmapbox-lite-ltr
+    noarch: generic
+    requirements:
+      run:
+        - enmapbox-lite
+        - qgis ={{ qgis_ltr_version }}
+
+  # --------------------------
+  # Full version with QGIS LTR
+  # --------------------------
+  - name: enmapbox-full-ltr
+    noarch: generic
+    requirements:
+      run:
+        - enmapbox-full
+        - qgis ={{ qgis_ltr_version }}
+
 
 about:
   home: https://github.com/EnMAP-Box/enmap-box
