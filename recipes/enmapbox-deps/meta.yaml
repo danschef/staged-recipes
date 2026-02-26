@@ -24,11 +24,11 @@ requirements:
     - netcdf4
     - numba>=0.56.4
     - opencv
-    - pandas=2.2.3
+    - pandas
     - pyopengl
     - pytorch
     - qgis>=3.42.2
-    - scikit-learn>=1
+    - scikit-learn
     - segmentation-models-pytorch
     - sympy
     - tensorboard
