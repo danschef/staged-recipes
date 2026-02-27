@@ -110,7 +110,7 @@ about:
   license: GPL-3.0-only
   summary: >
     Meta-package providing all conda dependencies required to run
-    the EnMAP-Box QGIS plugin.
+    several versions of the EnMAP-Box QGIS plugin.
   description: |
     This is a conda meta-package that installs the full runtime
     dependency stack defined in the EnMAP-Box conda environment
